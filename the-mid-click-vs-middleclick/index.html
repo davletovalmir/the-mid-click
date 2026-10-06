@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mid Click vs MiddleClick (the open-source app) · The Mid Click</title>
+<meta name="description" content="MiddleClick is the free open-source three-finger middle-click app for macOS. How it differs from The Mid Click, what broke on macOS 27, and which to pick.">
+<link rel="canonical" href="https://davletovalmir.github.io/the-mid-click/the-mid-click-vs-middleclick/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Mid Click vs MiddleClick (the open-source app)">
+<meta property="og:description" content="MiddleClick is the free open-source three-finger middle-click app for macOS. How it differs from The Mid Click, what broke on macOS 27, and which to pick.">
+<meta property="og:url" content="https://davletovalmir.github.io/the-mid-click/the-mid-click-vs-middleclick/">
+<meta property="og:image" content="https://davletovalmir.github.io/the-mid-click/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "The Mid Click vs MiddleClick (the open-source app)", "description": "MiddleClick is the free open-source three-finger middle-click app for macOS. How it differs from The Mid Click, what broke on macOS 27, and which to pick.", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "author": {"@type": "Person", "name": "Almir Davletov"}, "mainEntityOfPage": "https://davletovalmir.github.io/the-mid-click/the-mid-click-vs-middleclick/", "about": {"@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 26 or later"}}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>The Mid Click vs MiddleClick</h1>
+<p class="lead"><a href="https://github.com/artginzburg/MiddleClick">MiddleClick</a> is a free, open-source menu bar app that has given Mac users three-finger middle click for years. The Mid Click was built as a replacement after MiddleClick started crashing on macOS 27. Here's an honest comparison.</p>
+
+<div class="table-wrap"><table>
+  <tr><th></th><th>The Mid Click</th><th>MiddleClick</th></tr>
+  <tr><td>Price</td><td>7-day trial, then $1/year or $10 lifetime</td><td>Free, open source (MIT)</td></tr>
+  <tr><td>How it reads touches</td><td>Public macOS APIs: gesture events from a CGEvent tap and NSEvent touch data</td><td>Apple's private MultitouchSupport framework</td></tr>
+  <tr><td>Stability on macOS 27</td><td>Built and tested on it</td><td>Crashes in our testing (see below)</td></tr>
+  <tr><td>Tap and click modes</td><td>Both, switchable in the window</td><td>Both, via a setting</td></tr>
+  <tr><td>Three or four fingers</td><td>Both</td><td>Both</td></tr>
+  <tr><td>Interface</td><td>Window with a live test pad showing which button was received</td><td>Menu bar menu, no window</td></tr>
+  <tr><td>Launch at login</td><td>Optional switch, off by default</td><td>Optional</td></tr>
+  <tr><td>Distribution</td><td>Notarized download, auto-updates planned</td><td>GitHub releases, Homebrew</td></tr>
+</table></div>
+
+<h2>What happened on macOS 27</h2>
+<div class="facts"><dl>
+  <dt>Tested</dt><dd>MiddleClick 3.3.0 and The Mid Click 1.0</dd>
+  <dt>System</dt><dd>macOS 27.0 (build 26A428), MacBook Pro with Apple M5 Pro, built-in trackpad</dd>
+  <dt>Date</dt><dd>September 2026</dd>
+  <dt>Observed</dt><dd>MiddleClick terminated with <code>EXC_BAD_ACCESS (SIGBUS)</code> in <code>MultitouchSupport</code>, frame <code>MTAlg_IssueContactFrameCallbacks</code> → <code>mt_ProcessMultitouchFrame</code>, on the framework's own thread (<code>mt_ThreadedMTEntry</code>)</dd>
+</dl></div>
+<p>MiddleClick reads finger positions through <code>MultitouchSupport.framework</code>, a private Apple framework with no stability guarantees; <a href="https://github.com/artginzburg/MiddleClick">its source</a> links the framework directly. On the system above it crashed intermittently, typically after sleep or when a trackpad connected or disconnected. Because the app isn't a login item by default, each crash leaves you without middle click until you notice and relaunch it. The crash is inside Apple's framework rather than MiddleClick's own code, so a newer MiddleClick release may or may not avoid it; check its releases page before deciding.</p>
+
+<h2>Why The Mid Click uses public APIs</h2>
+<p>Instead of the private framework, The Mid Click listens to the gesture events macOS already delivers through a CGEvent tap and reads the touches with <code>NSEvent.allTouches()</code>, which Apple documents. Those APIs are what Apple's own frameworks use, so an OS update is far less likely to break them. The trade-off is that the public gesture stream gives slightly less detail than the private one; for counting fingers and spotting a tap, it's enough. <a href="../how-middle-click-works-on-macos/">Here's the full mechanism.</a></p>
+
+<h2>Which should you use?</h2>
+<ul>
+  <li><strong>MiddleClick</strong> if it runs stably on your macOS version, you're comfortable with GitHub or Homebrew, and you'd rather not pay. It's a good tool and the reason this category exists.</li>
+  <li><strong>The Mid Click</strong> if you're on macOS 26 or 27, want something that stays running, like seeing what the trackpad is doing, or want a maintained app with support behind it.</li>
+</ul>
+<p>Don't run both at once; you'll get two middle clicks per tap.</p>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>

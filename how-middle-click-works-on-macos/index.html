@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How middle click actually works on macOS · The Mid Click</title>
+<meta name="description" content="The path from a trackpad touch frame to a middle-button event in an app: HID, WindowServer, CGEvent, NSEvent, button numbers, event taps, and how a three-finger gesture becomes button 3.">
+<link rel="canonical" href="https://davletovalmir.github.io/the-mid-click/how-middle-click-works-on-macos/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How middle click actually works on macOS">
+<meta property="og:description" content="The path from a trackpad touch frame to a middle-button event in an app: HID, WindowServer, CGEvent, NSEvent, button numbers, event taps, and how a three-finger gesture becomes button 3.">
+<meta property="og:url" content="https://davletovalmir.github.io/the-mid-click/how-middle-click-works-on-macos/">
+<meta property="og:image" content="https://davletovalmir.github.io/the-mid-click/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How middle click actually works on macOS", "description": "The path from a trackpad touch frame to a middle-button event in an app: HID, WindowServer, CGEvent, NSEvent, button numbers, event taps, and how a three-finger gesture becomes button 3.", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "author": {"@type": "Person", "name": "Almir Davletov"}, "mainEntityOfPage": "https://davletovalmir.github.io/the-mid-click/how-middle-click-works-on-macos/", "about": {"@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 26 or later"}}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>How middle click actually works on macOS</h1>
+<p class="lead">This is the mechanism behind The Mid Click, written down because the author had to work it out from scratch. It's useful if you're building something similar, debugging why a middle click doesn't arrive, or just curious.</p>
+
+<h2>Button numbers</h2>
+<p>Core Graphics numbers mouse buttons from zero: left is 0, right is 1, middle is 2. AppKit delivers them as three distinct event types: <code>leftMouseDown</code>, <code>rightMouseDown</code>, and <code>otherMouseDown</code> with <code>buttonNumber == 2</code>. "Button 3" in X11 and older documentation is the same physical button; the off-by-one is historical. Anything above 2 is a side or extra button, also delivered as <code>otherMouseDown</code>.</p>
+
+<h2>The normal path, with a mouse</h2>
+<div class="flow">
+  <div>USB or Bluetooth HID report: button 2 pressed</div>
+  <div>IOHIDSystem turns it into a low-level event</div>
+  <div>WindowServer creates a CGEvent of type <code>otherMouseDown</code>, button 2, at the cursor position</div>
+  <div>Event taps registered by other processes see it here, in order of insertion</div>
+  <div>The frontmost app's run loop receives it and AppKit wraps it as an NSEvent</div>
+  <div>The view under the cursor gets <code>otherMouseDown(with:)</code></div>
+</div>
+
+<h2>What a trackpad sends instead</h2>
+<p>A trackpad reports two different streams. One is ordinary pointer movement and a single physical button (the whole pad is the button), so a press with any number of fingers arrives as <code>leftMouseDown</code>. The other is a gesture stream: a frame several times a second describing every finger in contact, with position, size and phase. Apple's frameworks use the gesture stream for pinch, rotate, swipe and Force Touch.</p>
+<p>Those gesture frames are visible to other processes too. They pass through the same event tap mechanism as mouse events, as CGEvents of type 29 (<code>NSEvent.EventType.gesture</code>). Converting one to an <code>NSEvent</code> and calling <a href="https://developer.apple.com/documentation/appkit/nsevent"><code>allTouches()</code></a> yields the contact list: each <a href="https://developer.apple.com/documentation/appkit/nstouch"><code>NSTouch</code></a> has an identity, a normalized position on the pad, and a phase (began, moved, stationary, ended). That is the documented, public way to see finger count without touching Apple's private <code>MultitouchSupport</code> framework, which is what older utilities used and what tends to break between OS versions.</p>
+<pre><code>// Tap gesture + left-button events system-wide. Requires Accessibility trust.
+var mask: CGEventMask = NSEvent.EventTypeMask.gesture.rawValue          // 1 &lt;&lt; 29
+for t in [CGEventType.leftMouseDown, .leftMouseUp, .leftMouseDragged] {
+    mask |= CGEventMask(1) &lt;&lt; CGEventMask(t.rawValue)
+}
+let tap = CGEvent.tapCreate(tap: .cgSessionEventTap, place: .headInsertEventTap,
+                            options: .defaultTap, eventsOfInterest: mask,
+                            callback: callback, userInfo: nil)
+
+// Inside the callback, for a gesture event:
+let touches = NSEvent(cgEvent: event)?.allTouches() ?? []
+let fingers = touches.filter { $0.phase != .ended &amp;&amp; $0.phase != .cancelled }.count</code></pre>
+
+<h2>Turning a gesture into button 2</h2>
+<p>With both streams in hand, two recognisers are enough:</p>
+<ul>
+  <li><strong>Tap:</strong> the contact count rises to exactly N, no touch moves more than a few percent of the pad, no button event occurs, and the count returns to zero within about 300 ms. Then post a synthetic <code>otherMouseDown</code> and <code>otherMouseUp</code> at the cursor via <code>CGEvent.post</code>.</li>
+  <li><strong>Click:</strong> a <code>leftMouseDown</code> arrives while the contact count is N. The tap callback changes the event's type to <code>otherMouseDown</code> and sets its button-number field to 2 before returning it. Subsequent <code>leftMouseDragged</code> and <code>leftMouseUp</code> events are rewritten the same way until the button is released, which is what makes middle-drag work.</li>
+</ul>
+<pre><code>// Tap mode: post a middle click at the cursor.
+let loc = CGEvent(source: nil)!.location
+let src = CGEventSource(stateID: .hidSystemState)
+for type in [CGEventType.otherMouseDown, .otherMouseUp] {
+    let e = CGEvent(mouseEventSource: src, mouseType: type,
+                    mouseCursorPosition: loc, mouseButton: .center)!
+    e.post(tap: .cghidEventTap)
+}
+
+// Click mode: rewrite the left click in flight, inside the tap callback.
+event.type = .otherMouseDown                                   // later: .otherMouseDragged / .otherMouseUp
+event.setIntegerValueField(.mouseEventButtonNumber, value: 2)  // 2 = middle
+return Unmanaged.passUnretained(event)</code></pre>
+<p>Rewriting in place is cleaner than swallowing the left click and posting a new one: the event keeps its original timestamp, position, and click count, and apps can't tell it from a real middle button. The relevant Apple documentation: <a href="https://developer.apple.com/documentation/coregraphics/cgevent">CGEvent</a> (tap creation, posting, value fields), <a href="https://developer.apple.com/documentation/coregraphics/cgeventtype">CGEventType</a>, <a href="https://developer.apple.com/documentation/appkit/nsevent">NSEvent</a> and <a href="https://developer.apple.com/documentation/appkit/nstouch">NSTouch</a>.</p>
+
+<h2>Where permissions come in</h2>
+<p>An event tap that can modify events, and posting any event, both require the process to be trusted in Accessibility. A listen-only tap needs the lesser Input Monitoring permission, but that doesn't cover posting, so a middle-click utility ends up needing Accessibility regardless. <a href="../accessibility-permission/">Here's what that means in practice.</a></p>
+
+<h2>Gotchas we hit</h2>
+<ul>
+  <li><strong>Ordering.</strong> On a fast three-finger press the button event can arrive one frame before the gesture frame that shows three contacts. Accepting a click that lands within 200 ms of the last three-contact frame fixed Click mode.</li>
+  <li><strong>Tap timeouts.</strong> If a tap callback is slow, WindowServer disables the tap and sends <code>tapDisabledByTimeout</code>. Re-enable it in the callback and keep the callback trivial.</li>
+  <li><strong>Resting fingers.</strong> People rest a thumb. Counting only touches whose phase isn't ended, and requiring the count to return to zero, avoids most false taps.</li>
+  <li><strong>Permission caching.</strong> macOS keys the Accessibility grant to the app's code signature. Rebuilding with a different signature silently invalidates it while the app still appears in the list. During development, sign every build with the same Apple-issued certificate.</li>
+</ul>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>

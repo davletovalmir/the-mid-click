@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Middle mouse button in Blender on a Mac · The Mid Click</title>
+<meta name="description" content="Blender's viewport orbits with the middle mouse button. How to get one on a MacBook trackpad: Emulate 3 Button Mouse, trackpad gestures, or The Mid Click's Click mode with middle-drag.">
+<link rel="canonical" href="https://davletovalmir.github.io/the-mid-click/middle-click-blender-mac/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Middle mouse button in Blender on a Mac">
+<meta property="og:description" content="Blender's viewport orbits with the middle mouse button. How to get one on a MacBook trackpad: Emulate 3 Button Mouse, trackpad gestures, or The Mid Click's Click mode with middle-drag.">
+<meta property="og:url" content="https://davletovalmir.github.io/the-mid-click/middle-click-blender-mac/">
+<meta property="og:image" content="https://davletovalmir.github.io/the-mid-click/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Middle mouse button in Blender on a Mac", "description": "Blender's viewport orbits with the middle mouse button. How to get one on a MacBook trackpad: Emulate 3 Button Mouse, trackpad gestures, or The Mid Click's Click mode with middle-drag.", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "author": {"@type": "Person", "name": "Almir Davletov"}, "mainEntityOfPage": "https://davletovalmir.github.io/the-mid-click/middle-click-blender-mac/", "about": {"@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 26 or later"}}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>Middle mouse button in Blender on a Mac</h1>
+<p class="lead">Blender's viewport is built around the middle mouse button: drag to orbit, <kbd>⇧</kbd>+drag to pan, <kbd>⌃</kbd>+drag to zoom. On a MacBook there is no such button. These are the three ways around it.</p>
+
+<h2>1. Blender's own trackpad gestures</h2>
+<p>Blender does read Mac trackpad gestures natively: two-finger scroll orbits, <kbd>⇧</kbd> + two-finger scroll pans, <kbd>⌃</kbd> + two-finger scroll zooms, and pinch zooms. This is enough for casual viewport navigation and needs nothing installed. It falls short when an add-on, a tool or a tutorial assumes a real middle button, and for the many operations where MMB does something other than orbit (dragging a value slider, panning the node editor, box-selecting in the outliner).</p>
+
+<h2>2. Emulate 3 Button Mouse</h2>
+<p>Preferences → Input → <em>Emulate 3 Button Mouse</em> turns <kbd>⌥</kbd> + left drag into a middle drag. It's reliable, but it hijacks <kbd>⌥</kbd>, which Blender uses for other things (loop select is <kbd>⌥</kbd>+click, and the conflict is why the preference has a "Modifier" dropdown). Many people switch it to <kbd>⌘</kbd> or OSKey to reduce collisions.</p>
+
+<h2>3. A real middle button from the trackpad</h2>
+<p><a href="../">The Mid Click</a> turns a three-finger click into a genuine middle-button event. For Blender, use <strong>Click</strong> mode, not Tap:</p>
+<ol>
+  <li>In The Mid Click, set Trigger to <strong>Click</strong>.</li>
+  <li>Rest three fingers on the trackpad and press. Keep pressing and move: Blender sees a middle-drag and orbits.</li>
+  <li>Add <kbd>⇧</kbd> while dragging to pan, <kbd>⌃</kbd> to zoom, exactly as with a mouse.</li>
+</ol>
+<p>Because it is a real button event, every MMB behaviour in Blender works: value sliders, node editor panning, the outliner, timeline scrubbing, and any add-on that binds MMB. Nothing in Blender's preferences needs to change, and <kbd>⌥</kbd> stays free.</p>
+
+<h2>Other 3D and CAD apps</h2>
+<p>The same Click mode works wherever middle-drag moves the camera: Fusion 360 (pan), Rhino (orbit), SketchUp (orbit), Unity and Unreal (pan and fly), Godot (orbit), and Figma or Miro for panning a 2D canvas. Each has its own keyboard fallback, but they all accept the real button.</p>
+
+<h2>Tips</h2>
+<ul>
+  <li>If a three-finger press starts a drag of the window instead, turn off three-finger drag in System Settings → Accessibility → Pointer Control → Trackpad Options, or switch The Mid Click to four fingers.</li>
+  <li>Tap mode is fine for quick MMB clicks (centre view on selection, for example), but orbiting needs the held press that only Click mode gives.</li>
+</ul>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>

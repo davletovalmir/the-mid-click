@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Why The Mid Click needs Accessibility permission · The Mid Click</title>
+<meta name="description" content="The Mid Click asks for macOS Accessibility access. Exactly what it uses it for, what it can and cannot see, and why no other permission would work.">
+<link rel="canonical" href="https://davletovalmir.github.io/the-mid-click/accessibility-permission/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why The Mid Click needs Accessibility permission">
+<meta property="og:description" content="The Mid Click asks for macOS Accessibility access. Exactly what it uses it for, what it can and cannot see, and why no other permission would work.">
+<meta property="og:url" content="https://davletovalmir.github.io/the-mid-click/accessibility-permission/">
+<meta property="og:image" content="https://davletovalmir.github.io/the-mid-click/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Why The Mid Click needs Accessibility permission", "description": "The Mid Click asks for macOS Accessibility access. Exactly what it uses it for, what it can and cannot see, and why no other permission would work.", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "author": {"@type": "Person", "name": "Almir Davletov"}, "mainEntityOfPage": "https://davletovalmir.github.io/the-mid-click/accessibility-permission/", "about": {"@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 26 or later"}}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>Why The Mid Click needs Accessibility permission</h1>
+<p class="lead">On macOS, any app that sends a synthetic mouse event or observes input across all apps has to be granted Accessibility access. That's the only reason The Mid Click asks for it. This page explains what it does with the permission, in plain terms and in technical ones.</p>
+
+<h2>What it uses the permission for</h2>
+<div class="flow">
+  <div>Trackpad reports touches to macOS</div>
+  <div>The Mid Click's event tap sees the touch count and any left-button press</div>
+  <div>Three fingers tapped, or three fingers down and the trackpad clicked</div>
+  <div>The Mid Click posts a middle-button event, or rewrites the left click into a middle click</div>
+  <div>The app under the cursor receives a normal middle click</div>
+</div>
+<p>That's the entire use. Two capabilities, both only available with Accessibility access: observing the trackpad and mouse button events system-wide, and sending one middle-click event.</p>
+
+<h2>What it does not do</h2>
+<ul>
+  <li>It does <strong>not read keystrokes</strong>. The event tap subscribes to gesture and mouse-button events only; keyboard events never reach it.</li>
+  <li>It does <strong>not read the screen</strong>, window contents, or the text under your cursor. It never uses the AXUIElement API that screen readers and window managers use.</li>
+  <li>It does <strong>not read the clipboard</strong>.</li>
+  <li>It does <strong>not log or store</strong> anything about your input. Touch data is used the instant it arrives and discarded.</li>
+  <li>It does <strong>not send anything over the network</strong> except a license-key check if you buy it. <a href="../privacy.html">Privacy policy.</a></li>
+</ul>
+
+<h2>Why not a narrower permission?</h2>
+<p>macOS has a separate <em>Input Monitoring</em> permission that allows observing input without modifying it. The Mid Click could use it for the detection half. But <em>sending</em> a mouse event (the middle click itself) has no permission of its own; macOS routes it through Accessibility. Asking for Input Monitoring as well would mean two prompts instead of one, with the same final requirement. So the app asks once, for the one permission that covers both.</p>
+
+<h2>Why it isn't on the Mac App Store</h2>
+<p>The Mid Click was submitted to the Mac App Store and rejected twice under guideline 2.4.5, which restricts Accessibility to assistive purposes; there is no App Store-approved way to synthesize a mouse button. Utilities such as <a href="https://folivora.ai">BetterTouchTool</a>, <a href="https://karabiner-elements.pqrs.org">Karabiner-Elements</a> and <a href="https://github.com/artginzburg/MiddleClick">MiddleClick</a> are also distributed outside the Mac App Store. The Mid Click is signed with an Apple Developer ID and notarized by Apple, which means Apple has scanned it for malware, but it has not been App Store-reviewed.</p>
+
+<h2>How to grant, check, or revoke it</h2>
+<ol>
+  <li>System Settings → Privacy &amp; Security → <strong>Accessibility</strong>. On macOS 27 the pane is named <strong>Device Control and Data Access</strong>.</li>
+  <li>Turn The Mid Click on. If it isn't listed, click + and pick it from Applications.</li>
+  <li>To revoke, turn it off or remove it with −. The app keeps running but shows "Not listening" and does nothing.</li>
+</ol>
+<p>If you reinstall the app after moving or rebuilding it and it stops working, macOS may be holding an old entry. Remove it and add the app again, or run <code>tccutil reset Accessibility com.almir.MidClick</code> in Terminal.</p>
+
+<h2>For the technically inclined</h2>
+<p>The tap is created with <code>CGEvent.tapCreate</code> at session level with a mask of gesture events (type 29) and left-button down, up and dragged. Gesture events are converted with <code>NSEvent(cgEvent:)</code> and <code>allTouches()</code> gives the contact list. The click is sent with <code>CGEvent(mouseEventSource:mouseType:.otherMouseDown…)</code> and <code>post(tap: .cghidEventTap)</code>, or by changing the type and button-number field of the left-click event in flight. The app is sandboxed and uses only documented APIs. <a href="../how-middle-click-works-on-macos/">The full event path.</a></p>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>

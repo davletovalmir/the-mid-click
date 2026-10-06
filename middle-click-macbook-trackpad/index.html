@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to middle click on a MacBook trackpad · The Mid Click</title>
+<meta name="description" content="macOS has no built-in three-finger middle click. Here are every way to middle click on a MacBook or Magic Trackpad, from per-app keyboard equivalents to a real middle button with The Mid Click.">
+<link rel="canonical" href="https://davletovalmir.github.io/the-mid-click/middle-click-macbook-trackpad/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to middle click on a MacBook trackpad">
+<meta property="og:description" content="macOS has no built-in three-finger middle click. Here are every way to middle click on a MacBook or Magic Trackpad, from per-app keyboard equivalents to a real middle button with The Mid Click.">
+<meta property="og:url" content="https://davletovalmir.github.io/the-mid-click/middle-click-macbook-trackpad/">
+<meta property="og:image" content="https://davletovalmir.github.io/the-mid-click/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to middle click on a MacBook trackpad", "description": "macOS has no built-in three-finger middle click. Here are every way to middle click on a MacBook or Magic Trackpad, from per-app keyboard equivalents to a real middle button with The Mid Click.", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "author": {"@type": "Person", "name": "Almir Davletov"}, "mainEntityOfPage": "https://davletovalmir.github.io/the-mid-click/middle-click-macbook-trackpad/", "about": {"@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 26 or later"}}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>How to middle click on a MacBook trackpad</h1>
+<p class="lead">Apple trackpads have no middle button and macOS has no setting that produces one. You have three realistic options: a keyboard equivalent that works in some apps, an external mouse, or a utility that turns a trackpad gesture into a real middle click.</p>
+
+<h2>Option 1: keyboard equivalents (free, app by app)</h2>
+<p>Many apps offer another route to the thing you'd middle click for:</p>
+<ul>
+  <li><strong>Open a link in a new tab:</strong> hold <kbd>⌘</kbd> and click the link. Works in Safari, Chrome, Arc, Firefox and Edge. Add <kbd>⇧</kbd> to also switch to it.</li>
+  <li><strong>Close a tab:</strong> <kbd>⌘</kbd><kbd>W</kbd> closes the current tab, but there is no keyboard way to close a tab you're merely pointing at.</li>
+  <li><strong>Blender:</strong> turn on <em>Emulate 3 Button Mouse</em> in Preferences → Input, then <kbd>⌥</kbd> + drag orbits. <a href="../middle-click-blender-mac/">Details.</a></li>
+  <li><strong>Terminal paste:</strong> macOS Terminal doesn't do middle-click paste at all; use <kbd>⌘</kbd><kbd>V</kbd>. iTerm2 has an option for it under Pointer settings.</li>
+</ul>
+<p>These cover the common cases but not the long tail: CAD viewports, games, remote desktops, Linux VMs, and web apps that listen for the middle button directly.</p>
+
+<h2>Option 2: an external mouse</h2>
+<p>Any three-button or scroll-wheel mouse gives macOS a real middle button with no software. Press the wheel. This is the right answer at a desk and the wrong answer on a train.</p>
+
+<h2>Option 3: a real middle click from the trackpad</h2>
+<p>A small utility can watch the trackpad for a specific gesture and send a genuine middle-button event, so every app sees exactly what a mouse would have sent. <a href="../">The Mid Click</a> does this with a three-finger tap or click:</p>
+<ol>
+  <li>Download it, move it to Applications, open it. It appears in the menu bar.</li>
+  <li>Grant Accessibility access when asked. <a href="../accessibility-permission/">This is why it's needed.</a></li>
+  <li>Pick <strong>Tap</strong> or <strong>Click</strong>, and <strong>Three</strong> or <strong>Four</strong> fingers.</li>
+  <li>Try it on the test pad in the window: it reports Left, Right or Middle for each click it receives.</li>
+</ol>
+<div class="facts"><dl>
+  <dt>Tap mode</dt><dd>Three fingers down and up within about 300 ms, without sliding. Fastest. Fingers must not be resting beforehand.</dd>
+  <dt>Click mode</dt><dd>Rest three fingers and press the trackpad. The left click becomes a middle click, and holding it gives you middle-drag, which 3D apps need.</dd>
+  <dt>Four fingers</dt><dd>Same as above with four, for people who already use three-finger gestures.</dd>
+</dl></div>
+
+<h2>Gestures that can get in the way</h2>
+<p>macOS reserves some multi-finger gestures. Check these in System Settings → Trackpad if a tap isn't recognised:</p>
+<ul>
+  <li><strong>Look up &amp; data detectors</strong> set to "Tap with three fingers" steals three-finger taps. Set it to "Force Click with one finger" or off.</li>
+  <li><strong>Three-finger drag</strong> (Accessibility → Pointer Control → Trackpad Options) turns a three-finger press into a drag. Use Tap mode or switch to four fingers.</li>
+  <li><strong>Swipe between full-screen apps</strong> and <strong>Mission Control</strong> use three or four-finger swipes. Taps and clicks don't trigger them, but a sloppy tap that slides can.</li>
+</ul>
+
+<h2>Which should you use?</h2>
+<p>If you only ever want "open in new tab" in a browser, <kbd>⌘</kbd>-click is enough and free. If you close tabs by pointing at them, work in 3D or CAD tools, use a Linux VM, or just miss the button, a gesture utility is the only thing that behaves like a real middle button everywhere.</p>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>

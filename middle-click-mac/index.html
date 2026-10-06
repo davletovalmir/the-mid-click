@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How to middle click on a Mac · The Mid Click</title>
+<meta name="description" content="Every way to middle click on a Mac: a mouse wheel, Magic Mouse limitations, keyboard equivalents per app, and trackpad gestures with The Mid Click.">
+<link rel="canonical" href="https://davletovalmir.github.io/the-mid-click/middle-click-mac/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to middle click on a Mac">
+<meta property="og:description" content="Every way to middle click on a Mac: a mouse wheel, Magic Mouse limitations, keyboard equivalents per app, and trackpad gestures with The Mid Click.">
+<meta property="og:url" content="https://davletovalmir.github.io/the-mid-click/middle-click-mac/">
+<meta property="og:image" content="https://davletovalmir.github.io/the-mid-click/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "How to middle click on a Mac", "description": "Every way to middle click on a Mac: a mouse wheel, Magic Mouse limitations, keyboard equivalents per app, and trackpad gestures with The Mid Click.", "datePublished": "2026-10-05", "dateModified": "2026-10-05", "author": {"@type": "Person", "name": "Almir Davletov"}, "mainEntityOfPage": "https://davletovalmir.github.io/the-mid-click/middle-click-mac/", "about": {"@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 26 or later"}}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>How to middle click on a Mac</h1>
+<p class="lead">Middle click is a standard mouse button that macOS supports fully, but Apple's own input devices don't have it. What works depends on which device you're holding.</p>
+
+<h2>With a third-party mouse</h2>
+<p>Press the scroll wheel. macOS has supported the middle button since the first USB mice; nothing to configure. If a wheel press does nothing in a particular app, that app simply doesn't use middle click.</p>
+
+<h2>With a Magic Mouse</h2>
+<p>The Magic Mouse has one touch surface and reports only left and right clicks. There is no middle-click setting in System Settings. The same utilities that work for trackpads can map a gesture on it, but since its surface is small, most people pick a <strong>three-finger click</strong> rather than a tap.</p>
+
+<h2>With a trackpad</h2>
+<p>Built-in MacBook trackpads and the Magic Trackpad have no middle button either. Your options are a keyboard equivalent in apps that offer one, or a utility such as <a href="../">The Mid Click</a> that turns a three-finger tap or click into a real middle-button event. <a href="../middle-click-macbook-trackpad/">The trackpad guide</a> walks through both.</p>
+
+<h2>Keyboard equivalents that cover the common cases</h2>
+<div class="table-wrap"><table>
+  <tr><th>You want to</th><th>Instead of middle click</th><th>Where it works</th></tr>
+  <tr><td>Open a link in a background tab</td><td><kbd>⌘</kbd> + click</td><td>Safari, Chrome, Arc, Firefox, Edge</td></tr>
+  <tr><td>Open a link in a new foreground tab</td><td><kbd>⌘</kbd><kbd>⇧</kbd> + click</td><td>Same browsers</td></tr>
+  <tr><td>Close the current tab</td><td><kbd>⌘</kbd><kbd>W</kbd></td><td>Everywhere with tabs</td></tr>
+  <tr><td>Close a tab you're pointing at</td><td>No equivalent</td><td>—</td></tr>
+  <tr><td>Orbit in Blender</td><td><kbd>⌥</kbd> + drag with Emulate 3 Button Mouse on</td><td>Blender only</td></tr>
+  <tr><td>Paste selection in a terminal</td><td><kbd>⌘</kbd><kbd>V</kbd></td><td>Terminal, iTerm2</td></tr>
+  <tr><td>Autoscroll a page</td><td>No equivalent on macOS</td><td>—</td></tr>
+</table></div>
+
+<h2>What "middle click" means to macOS</h2>
+<p>Internally it's mouse button number 2 (buttons count from zero), delivered to apps as <code>otherMouseDown</code> and <code>otherMouseUp</code> events. Any software that generates those events, or any hardware that reports a third button, gives you the real thing. <a href="../how-middle-click-works-on-macos/">The technical page</a> follows the event from the trackpad's touch frames to the app.</p>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>

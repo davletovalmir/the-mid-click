@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mid Click — middle click for your Mac trackpad</title>
+<meta name="description" content="The Mid Click is a macOS utility that turns a three-finger trackpad tap or click into a standard middle mouse click. 7-day free trial, then $1/year or $10 lifetime.">
+<link rel="canonical" href="https://davletovalmir.github.io/the-mid-click/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="The Mid Click — middle click for your Mac trackpad">
+<meta property="og:description" content="The Mid Click is a macOS utility that turns a three-finger trackpad tap or click into a standard middle mouse click. 7-day free trial, then $1/year or $10 lifetime.">
+<meta property="og:url" content="https://davletovalmir.github.io/the-mid-click/">
+<meta property="og:image" content="https://davletovalmir.github.io/the-mid-click/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="icon.png">
+<link rel="stylesheet" href="style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 26 or later", "applicationCategory": "UtilitiesApplication", "description": "The Mid Click is a macOS utility that turns a three-finger trackpad tap or click into a standard middle mouse click. 7-day free trial, then $1/year or $10 lifetime.", "url": "https://davletovalmir.github.io/the-mid-click/", "downloadUrl": "https://github.com/davletovalmir/the-mid-click/releases/latest", "softwareVersion": "1.0", "author": {"@type": "Person", "name": "Almir Davletov"}, "offers": [{"@type": "Offer", "price": "1.00", "priceCurrency": "USD", "name": "Yearly", "description": "7-day free trial, then $1 per year"}, {"@type": "Offer", "price": "10.00", "priceCurrency": "USD", "name": "Lifetime"}]}</script>
+</head>
+<body>
+<nav><img src="icon.png" alt=""><a href="">The Mid Click</a><span class="links"><a href="#download">Download</a><a href="#guides">Guides</a><a href="#support">Support</a><a href="privacy.html">Privacy</a></span></nav>
+<main>
+<h1>Middle click on a Mac trackpad</h1>
+<p class="lead">macOS has no built-in way to middle click from a trackpad. The Mid Click is a small macOS utility that turns a three-finger (or four-finger) trackpad tap or click into a standard middle mouse click, in every app.</p>
+
+<p id="download">
+  <a class="cta" href="https://github.com/davletovalmir/the-mid-click/releases/latest">Download for macOS</a>
+  <a class="cta secondary" href="#pricing">7-day free trial, then $1/year</a>
+</p>
+<p class="meta">Version 1.0 · Requires macOS 26 or later · Notarized by Apple · 2 MB</p>
+
+<div class="hero"><img src="hero.png" alt="The Mid Click window showing a detected middle click on the test pad"></div>
+
+<div class="facts"><dl>
+  <dt>Works with</dt><dd>Built-in MacBook trackpads and Magic Trackpad</dd>
+  <dt>Gesture</dt><dd>Three-finger tap, three-finger click, or four fingers of either</dd>
+  <dt>Output</dt><dd>A standard middle mouse button event (button 3), including middle-drag in Click mode</dd>
+  <dt>Useful for</dt><dd>Opening links in background tabs, closing browser tabs, orbiting in Blender and CAD, pasting in terminals, anything mapped to the middle button</dd>
+  <dt>Permission</dt><dd>Accessibility, used only to read trackpad touches and send the click. <a href="accessibility-permission/">Why, and what it can't see</a></dd>
+  <dt>Footprint</dt><dd>Menu bar only, no Dock icon, two settings, no network use except license checks</dd>
+</dl></div>
+
+<h2 id="how">How it works</h2>
+<ol>
+  <li>Download, unzip, move The Mid Click to Applications, open it.</li>
+  <li>Grant Accessibility access when macOS asks. <a href="accessibility-permission/">Here is exactly what that permission is used for.</a></li>
+  <li>Tap the trackpad with three fingers. The test pad in the window reports "Middle click". That's it.</li>
+</ol>
+<p>Choose <strong>Tap</strong> for speed or <strong>Click</strong> for a physical press that also supports middle-drag. Choose <strong>Three</strong> or <strong>Four</strong> fingers to avoid colliding with gestures you already use. Turn on <strong>Launch at login</strong> if you want it always on.</p>
+
+<h2 id="pricing">Pricing</h2>
+<div class="pricing">
+  <div class="price"><b>Free</b><span>7-day trial, every feature, no card.</span></div>
+  <div class="price"><b>$1 / year</b><span>Cheaper than a coffee. Cancel any time.</span></div>
+  <div class="price"><b>$10 lifetime</b><span>One payment, every future update.</span></div>
+</div>
+<p>Buy from inside the app and paste the license key it emails you. One license covers all the Macs you own.</p>
+
+<h2 id="guides">Guides</h2>
+<div class="card"><h3><a href="middle-click-macbook-trackpad/">How to middle click on a MacBook trackpad</a></h3><p>Every option, from Cmd-click workarounds to a real middle button, and how to set it up.</p></div>
+<div class="card"><h3><a href="middle-click-browser-mac/">Middle click in Safari, Chrome, Arc and Firefox</a></h3><p>Open links in the background and close tabs with one tap.</p></div>
+<div class="card"><h3><a href="middle-click-blender-mac/">Middle mouse button in Blender on a Mac</a></h3><p>Orbit, pan and zoom from the trackpad without emulating a three-button mouse.</p></div>
+<div class="card"><h3><a href="the-mid-click-vs-bettertouchtool/">The Mid Click vs BetterTouchTool</a></h3><p>When you want one gesture and when you want a hundred.</p></div>
+<div class="card"><h3><a href="the-mid-click-vs-middleclick/">The Mid Click vs MiddleClick</a></h3><p>The free open-source app, what changed on macOS 27, and why this one uses public APIs.</p></div>
+<div class="card"><h3><a href="how-middle-click-works-on-macos/">How middle click actually works on macOS</a></h3><p>From the trackpad's touch frames to button 3, with the real event names.</p></div>
+
+<h2 id="support">Support</h2>
+<div class="card"><h3>The app says "Not listening"</h3><p>It needs Accessibility access. Open System Settings → Privacy &amp; Security → Accessibility (on macOS 27 it's called Device Control and Data Access) and turn on The Mid Click. If it isn't listed, click the plus button and choose it from Applications.</p></div>
+<div class="card"><h3>Where is the app? I don't see a window</h3><p>It lives in the menu bar as a three-dot icon and has no Dock icon. Click the icon and choose Open The Mid Click to change settings or test clicks.</p></div>
+<div class="card"><h3>Hiding or restoring the menu bar icon</h3><p>Hold ⌘ and drag the icon off the menu bar to hide it; the app keeps working. To get the icon and window back, open The Mid Click from Applications.</p></div>
+<div class="card"><h3>Tap does nothing, but Click works</h3><p>Taps must be short and still: three fingers down and up within about a third of a second without sliding. If you rest your fingers first, use Click mode instead.</p></div>
+<div class="card"><h3>Three-finger tap conflicts with another gesture</h3><p>Switch to four fingers in the app, or change the conflicting gesture in System Settings → Trackpad. The usual culprit is "Look up &amp; data detectors" set to "Tap with three fingers".</p></div>
+<div class="card"><h3>I bought a license but it says trial</h3><p>Click "Enter key" in the app and paste the key from your purchase email. A key can be moved between Macs with Deactivate.</p></div>
+<div class="card"><h3>Something else</h3><p>Email <a href="mailto:davletovalmir@gmail.com">davletovalmir@gmail.com</a> with your macOS version and what you expected to happen.</p></div>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="accessibility-permission/">Accessibility permission</a></li><li><a href="how-middle-click-works-on-macos/">How it works</a></li><li><a href="middle-click-blender-mac/">Blender</a></li><li><a href="middle-click-browser-mac/">Browsers</a></li><li><a href="middle-click-mac/">Middle click on Mac</a></li><li><a href="middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="the-mid-click-vs-middleclick/">vs MiddleClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="">The Mid Click</a><a href="privacy.html">Privacy Policy</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>
