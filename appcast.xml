@@ -1,0 +1,15 @@
+<?xml version="1.0" standalone="yes"?>
+<rss xmlns:sparkle="http://www.andymatuschak.org/xml-namespaces/sparkle" version="2.0">
+    <channel>
+        <title>The Mid Click</title>
+        <item>
+            <title>1.0.10</title>
+            <pubDate>Fri, 23 Oct 2026 15:25:37 -0700</pubDate>
+            <link>https://themidclick.com/</link>
+            <sparkle:version>14</sparkle:version>
+            <sparkle:shortVersionString>1.0.10</sparkle:shortVersionString>
+            <sparkle:minimumSystemVersion>13.3</sparkle:minimumSystemVersion>
+            <enclosure url="https://github.com/davletovalmir/the-mid-click/releases/download/v1.0.10/TheMidClick.zip" length="3305242" type="application/octet-stream" sparkle:edSignature="SmVsk4TILLQTEAtVLOzmR56IT+U6XD3w0jlkz7wlJC1CR8aAiO30muX6hhdPa/TTAL4LRwrfIAE2Mw5Zpkn/DQ=="/>
+        </item>
+    </channel>
+</rss>
