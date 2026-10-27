@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Mid Click vs WheelClick · The Mid Click</title>
+<meta name="description" content="WheelClick is the closed-source successor to MiddleClick, free for trackpad three-finger click. How it compares with The Mid Click on price, gestures, privacy, macOS support and interface.">
+<link rel="canonical" href="https://themidclick.com/the-mid-click-vs-wheelclick/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="The Mid Click vs WheelClick">
+<meta property="og:description" content="WheelClick is the closed-source successor to MiddleClick, free for trackpad three-finger click. How it compares with The Mid Click on price, gestures, privacy, macOS support and interface.">
+<meta property="og:url" content="https://themidclick.com/the-mid-click-vs-wheelclick/">
+<meta property="og:image" content="https://themidclick.com/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "TechArticle", "headline": "The Mid Click vs WheelClick", "description": "WheelClick is the closed-source successor to MiddleClick, free for trackpad three-finger click. How it compares with The Mid Click on price, gestures, privacy, macOS support and interface.", "datePublished": "2026-10-26", "dateModified": "2026-10-26", "author": {"@type": "Person", "name": "Almir Davletov"}, "mainEntityOfPage": "https://themidclick.com/the-mid-click-vs-wheelclick/", "about": {"@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 13.3 or later"}}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>The Mid Click vs WheelClick</h1>
+<p class="lead"><a href="https://wheelclick.app">WheelClick</a> is the successor to the open-source <a href="../the-mid-click-vs-middleclick/">MiddleClick</a>, rebuilt from scratch by the same developer and released in 2026. It does the same core thing as The Mid Click, a three-finger click or tap on the trackpad becomes a middle click, and then adds a lot more. Here's an honest comparison, with the facts taken from WheelClick's own site and README.</p>
+
+<div class="table-wrap"><table>
+  <tr><th></th><th>The Mid Click</th><th>WheelClick</th></tr>
+  <tr><td>Price</td><td>7-day trial, then $1/year or $10 lifetime</td><td>Trackpad three-finger click and tap free forever; $4.99 once unlocks fn+Click, Force Click, Magic Mouse, plugins and per-app rules, after a 14-day trial</td></tr>
+  <tr><td>Gestures</td><td>Three- or four-finger tap or click</td><td>Three-finger click or tap, fn+Click, Force Click (deeper press). No four-finger option listed</td></tr>
+  <tr><td>Devices</td><td>Built-in trackpad and Magic Trackpad</td><td>Trackpad, plus Magic Mouse in the paid direct-download version</td></tr>
+  <tr><td>Middle-drag</td><td>In Click mode: press with three fingers and drag</td><td>Plugin: hold three fingers still and slide, or ⌥-drag</td></tr>
+  <tr><td>Extras</td><td>None by design</td><td>Autoscroll, three-finger swipe for volume and brightness, ignore-app and allow-list rules, pause</td></tr>
+  <tr><td>Interface</td><td>Window with a live test pad showing which button arrived and how many fingers are down</td><td>Menu bar menu only, no window</td></tr>
+  <tr><td>Permissions</td><td>Accessibility</td><td>Accessibility, plus a bundled helper for Magic Mouse</td></tr>
+  <tr><td>Data collection</td><td>None. The only requests are license and update checks</td><td>Anonymous daily gesture counts under a random install ID, with a switch to turn it off</td></tr>
+  <tr><td>macOS</td><td>13.3 or later</td><td>12 or later</td></tr>
+  <tr><td>Source</td><td>Closed</td><td>Closed (the predecessor MiddleClick stays open, GPL-3.0)</td></tr>
+  <tr><td>Distribution</td><td>Notarized download, updates itself</td><td>Mac App Store, notarized .dmg, Homebrew</td></tr>
+</table></div>
+
+<h2>Where WheelClick is the better pick</h2>
+<p>If you want more than a middle click, WheelClick wins on breadth: Magic Mouse support, a force-click trigger, per-app rules, autoscroll, and an App Store listing with Apple handling updates. Its free tier also covers the exact thing The Mid Click charges for, a three-finger click or tap on the trackpad, so if price is the only question, WheelClick is the cheaper answer. It also reaches back to macOS 12, one release further than The Mid Click.</p>
+
+<h2>Where The Mid Click is the better pick</h2>
+<ul>
+  <li><strong>Four fingers.</strong> If a three-finger tap collides with a gesture you already use, The Mid Click moves to four. WheelClick lists only three-finger gestures.</li>
+  <li><strong>Seeing what's happening.</strong> The test pad shows which mouse button arrived and the dots show how many fingers the trackpad reports, which is how you find out in ten seconds whether a gesture conflict or a permission is the problem. <a href="../accessibility-permission/">That matters most on the day you grant Accessibility.</a></li>
+  <li><strong>Nothing phoning home.</strong> The Mid Click sends no usage data at all; WheelClick sends anonymous gesture counts daily unless you switch it off. Both are reasonable choices, but if you'd rather not have a switch to find, this is the simpler one. <a href="../privacy.html">The full privacy policy is one screen.</a></li>
+  <li><strong>Two settings.</strong> Fingers and trigger, and that's the whole app. If you want a tool that never grows, this is it.</li>
+</ul>
+
+<h2>How they read the trackpad</h2>
+<p>MiddleClick, the predecessor, depended on Apple's private MultitouchSupport framework, which is what <a href="../the-mid-click-vs-middleclick/">started crashing on macOS 27</a>. WheelClick's site says the app contains no private frameworks, and The Mid Click reads touches through the gesture events macOS documents. So on that point the two modern apps are alike, and either should survive OS updates better than the original. <a href="../how-middle-click-works-on-macos/">Here's how the touch stream becomes button 3.</a></p>
+
+<h2>Which should you use?</h2>
+<ul>
+  <li><strong>WheelClick</strong> if you own a Magic Mouse, want force click or fn+Click, want per-app rules, or simply want three-finger middle click for free.</li>
+  <li><strong>The Mid Click</strong> if you need four fingers, want to see the trackpad's finger count and the received button on screen, prefer an app with no telemetry, or like a tool with two settings and nothing else.</li>
+</ul>
+<p>Don't run both at once; you'll get two middle clicks per tap.</p>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li><li><a href="../the-mid-click-vs-wheelclick/">vs WheelClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="../terms.html">Terms &amp; Refunds</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>

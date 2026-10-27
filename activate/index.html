@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Activate The Mid Click · The Mid Click</title>
+<meta name="description" content="Activate your The Mid Click license key after purchase.">
+<link rel="canonical" href="https://themidclick.com/activate/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Activate The Mid Click">
+<meta property="og:description" content="Activate your The Mid Click license key after purchase.">
+<meta property="og:url" content="https://themidclick.com/activate/">
+<meta property="og:image" content="https://themidclick.com/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<meta name="robots" content="noindex">
+<link rel="icon" href="../icon.png">
+<link rel="stylesheet" href="../style.css">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "SoftwareApplication", "name": "The Mid Click", "operatingSystem": "macOS 13.3 or later", "applicationCategory": "UtilitiesApplication", "description": "Activate your The Mid Click license key after purchase.", "url": "https://themidclick.com/", "downloadUrl": "https://github.com/davletovalmir/the-mid-click/releases/latest/download/TheMidClick.zip", "softwareVersion": "1.0.11", "author": {"@type": "Person", "name": "Almir Davletov"}, "offers": [{"@type": "Offer", "price": "1.00", "priceCurrency": "USD", "name": "Yearly", "description": "7-day free trial, then $1 per year"}, {"@type": "Offer", "price": "10.00", "priceCurrency": "USD", "name": "Lifetime"}]}</script>
+</head>
+<body>
+<nav><img src="../icon.png" alt=""><a href="../">The Mid Click</a><span class="links"><a href="../#download">Download</a><a href="../#guides">Guides</a><a href="../#support">Support</a><a href="../privacy.html">Privacy</a></span></nav>
+<main>
+<h1>Thanks for buying The Mid Click</h1>
+<p class="lead" id="lead">Your license key is below. Click the button and the app will activate itself.</p>
+
+<div class="card" id="keycard">
+  <h3>Your license key</h3>
+  <p><code id="key" style="font-size:16px;user-select:all;word-break:break-all">…</code></p>
+</div>
+
+<p>
+  <a class="cta" id="open" href="#">Open The Mid Click</a>
+  <a class="cta secondary" id="copy" href="#">Copy key</a>
+</p>
+<p class="meta" id="hint">If macOS asks whether to open The Mid Click, choose Open.</p>
+
+<h2>Don't have the app yet?</h2>
+<ol>
+  <li><a href="https://github.com/davletovalmir/the-mid-click/releases/latest/download/TheMidClick.zip">Download The Mid Click</a>, unzip it, move it to Applications and open it.</li>
+  <li>Come back to this page and click <strong>Open The Mid Click</strong>, or click <strong>Restore purchase</strong> in the app and paste the key.</li>
+</ol>
+<p>The key is also in your receipt email, so you can do this any time. One key covers up to 5 Macs. Questions: <a href="mailto:davletovalmir@gmail.com">davletovalmir@gmail.com</a>.</p>
+
+<script>
+(function () {
+  var key = (new URLSearchParams(location.search).get("key") || "").trim();
+  var keyEl = document.getElementById("key"), open = document.getElementById("open"), copy = document.getElementById("copy");
+  if (!key || key.indexOf("[") === 0) {
+    document.getElementById("lead").textContent = "This page activates The Mid Click with the license key from your purchase. Open it from the button on your receipt, or paste the key from your receipt email into the app under Restore purchase.";
+    document.getElementById("keycard").style.display = "none";
+    open.style.display = copy.style.display = "none";
+    document.getElementById("hint").style.display = "none";
+    return;
+  }
+  keyEl.textContent = key;
+  var scheme = "themidclick://activate?key=" + encodeURIComponent(key);
+  open.href = scheme;
+  copy.addEventListener("click", function (e) {
+    e.preventDefault();
+    var done = function () { copy.textContent = "Copied"; setTimeout(function () { copy.textContent = "Copy key"; }, 2000); };
+    if (navigator.clipboard) navigator.clipboard.writeText(key).then(done, done);
+    else { var r = document.createRange(); r.selectNodeContents(keyEl); var s = getSelection(); s.removeAllRanges(); s.addRange(r); document.execCommand("copy"); done(); }
+  });
+  // Try the app straight away; the button stays for browsers that block automatic scheme launches.
+  setTimeout(function () { location.href = scheme; }, 500);
+})();
+</script>
+
+</main>
+<aside class="more"><h2>Middle click guides</h2><ul><li><a href="../accessibility-permission/">Accessibility permission</a></li><li><a href="../how-middle-click-works-on-macos/">How it works</a></li><li><a href="../middle-click-blender-mac/">Blender</a></li><li><a href="../middle-click-browser-mac/">Browsers</a></li><li><a href="../middle-click-mac/">Middle click on Mac</a></li><li><a href="../middle-click-macbook-trackpad/">MacBook trackpad</a></li><li><a href="../the-mid-click-vs-bettertouchtool/">vs BetterTouchTool</a></li><li><a href="../the-mid-click-vs-middleclick/">vs MiddleClick</a></li><li><a href="../the-mid-click-vs-wheelclick/">vs WheelClick</a></li></ul></aside>
+<footer><span>© 2026 Almir Davletov</span><a href="../">The Mid Click</a><a href="../privacy.html">Privacy Policy</a><a href="../terms.html">Terms &amp; Refunds</a><a href="mailto:davletovalmir@gmail.com">Contact</a></footer>
+</body>
+</html>
